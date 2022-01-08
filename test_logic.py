@@ -26,7 +26,6 @@ class Logic2048:
             else:
                 tek = self.grid[:, i]
 
-
             revers = False
             if move in 'rd':
                 revers = True
@@ -77,6 +76,7 @@ class Logic2048:
             if all((self.grid == old_grid).flatten()):
                 continue
             self.generate_number()
+
 
 if __name__ == '__main__':
     game = Logic2048()
