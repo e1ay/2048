@@ -72,7 +72,11 @@ class Logic2048:
             s = input()
             if s == 'q':
                 break
+            old_grid = self.grid.copy()
             self.make_move(s)
+            if all((self.grid == old_grid).flatten()):
+                continue
+            self.generate_number()
 
 if __name__ == '__main__':
     game = Logic2048()
