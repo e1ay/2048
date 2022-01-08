@@ -21,12 +21,29 @@ class Logic2048:
 
     def make_move(self, move):
         for i in range(settings.n):
-            tek = self.grid[i, :]
+            if move in 'lr':
+                tek = self.grid[i, :]
+            else:
+                tek = self.grid[:, i]
+
+
+            revers = False
+            if move in 'rd':
+                revers = True
+                tek = tek[::-1]
+
             tek_number = self.sum_numbers(tek)
 
             new_tek = np.zeros_like(tek)
             new_tek[:len(tek_number)] = tek_number
-            self.grid[i, :] = new_tek
+
+            if revers:
+                new_tek = new_tek[::-1]
+
+            if move in 'lr':
+                self.grid[i, :] = new_tek
+            else:
+                self.grid[:, i] = new_tek
 
     @staticmethod
     def sum_numbers(tek):
