@@ -48,11 +48,15 @@ class Logic2048:
 
         return np.array(tek_number_sum)
 
+    def play(self):
+        self.generate_number(k=2)
+        while True:
+            print(self.grid)
+            s = input()
+            if s == 'q':
+                break
+            self.make_move(s)
 
 if __name__ == '__main__':
     game = Logic2048()
-    game.generate_number(k=2)
-    game.generate_number(k=2)
-    print(game)
-    game.make_move(move='l')
-    print(game)
+    game.play()
