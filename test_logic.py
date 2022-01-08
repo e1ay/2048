@@ -5,7 +5,7 @@ import random
 
 class Logic2048:
     def __init__(self):
-        self.grid = np.zeros(settings.matrix_size1)
+        self.grid = np.zeros(settings.matrix_size1, dtype=int)
 
     def __str__(self):
         return str(self.grid)
@@ -22,15 +22,36 @@ class Logic2048:
     def make_move(self, move):
         for i in range(settings.n):
             tek = self.grid[i, :]
-            tek_n = tek[tek != 0]
+            tek_number = self.sum_numbers(tek)
 
             new_tek = np.zeros_like(tek)
-            new_tek[:len(tek_n)] = tek_n
+            new_tek[:len(tek_number)] = tek_number
             self.grid[i, :] = new_tek
+
+    @staticmethod
+    def sum_numbers(tek):
+        tek_number = tek[tek != 0]
+        tek_number_sum = []
+        flag = False
+
+        for j in range(len(tek_number)):
+            if flag:
+                flag = False
+                continue
+            if j != len(tek_number) - 1 and tek_number[j] == tek_number[j + 1]:
+                new_number = tek_number[j] * 2
+                flag = True
+            else:
+                new_number = tek_number[j]
+
+            tek_number_sum.append(new_number)
+
+        return np.array(tek_number_sum)
 
 
 if __name__ == '__main__':
     game = Logic2048()
+    game.generate_number(k=2)
     game.generate_number(k=2)
     print(game)
     game.make_move(move='l')
