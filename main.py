@@ -124,7 +124,7 @@ class Game2048:
         grid_copy = self.grid.copy()
         for move in 'lrud':
             self.make_move(move)
-            if not all((self.grid == grid_copy).fletten()):
+            if not all((self.grid == grid_copy).flatten()):
                 self.grid = grid_copy
                 return False
         return True
