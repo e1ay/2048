@@ -4,12 +4,12 @@ import random
 import sys
 from pygame.locals import *
 import pygame
-
+import time
 
 class Game2048:
 
     def __init__(self):
-        self.grid = np.zeros(settings.matrix_size1, dtype=int)
+        self.grid = np.zeros((settings.n, settings.n), dtype=int)
 
 
         # self.W = 400
@@ -129,7 +129,10 @@ class Game2048:
                 return False
         return True
 
-
+    def win(self):
+        if self.grid.__contains__(settings.victory_point):
+            return True
+        return False
 
     def play(self):
         self.generate_number(k=2)
@@ -144,11 +147,16 @@ class Game2048:
             self.make_move(s)
 
             if self.game_over():
-                print('game over')
-                break
+                print('loss')
+            if self.win():
+                print('win')
+
+            pygame.display.update()
+
+
             if not all((self.grid == old_grid).flatten()):
                 self.generate_number()
 
-if __name__ == '__main__':
-    game = Game2048()
-    game.play()
+
+
+

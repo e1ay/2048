@@ -1,11 +1,11 @@
 import numpy as np
 
 n = 4
-w = 400
-matrix_size1 = (n, n)
+w = 600
 window_size = (w, w)
 block_size = 50
 margin = 10
+victory_point = 1024
 
 colors = {
     0: (204, 192, 179),
@@ -21,7 +21,7 @@ colors = {
     1024: (227, 186, 19),
     2048: (236, 196, 2),
     4096: (96, 217, 146),
-    'background': (189, 172, 161)
+    'background': (242,	221,	198)
 }
 
 test_grid = np.array([[2, 4, 8, 16],
