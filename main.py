@@ -1,3 +1,5 @@
+import sqlite3
+
 import numpy as np
 import settings
 import random
@@ -173,7 +175,7 @@ class Game2048:
         self.screen.blit(text, (text_x, text_y))
         pygame.draw.rect(self.screen, (0, 255, 0), (text_x - 10, text_y - 10,
                                                text_w + 20, text_h + 20), 1)
-        print(self.player_name, 'win')
+        self.add_to_db()
 
     def end_lose(self):
         self.screen.fill((0, 0, 0))
@@ -186,3 +188,10 @@ class Game2048:
         self.screen.blit(text, (text_x, text_y))
         pygame.draw.rect(self.screen, (255, 0, 0), (text_x - 10, text_y - 10,
                                                text_w + 20, text_h + 20), 1)
+
+    def add_to_db(self):
+        con = sqlite3.connect('database.sqlite')
+        cur = con.cursor()
+        cur.execute("""INSERT into RECORDS(name, score) VALUES(?, ?)""", (settings.player_name, settings.victory_point))
+        con.commit()
+        con.close()
