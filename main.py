@@ -6,15 +6,14 @@ from pygame.locals import *
 import pygame
 import time
 
+
 class Game2048:
 
     def __init__(self):
         self.grid = np.zeros((settings.n, settings.n), dtype=int)
 
-
         # self.W = 400
         # self.H = self.W
-
 
         pygame.init()
         # logo = pygame.image.load('logo32x32.png')
@@ -81,8 +80,6 @@ class Game2048:
 
         return np.array(tek_number_sum)
 
-
-
     def draw_game(self):
         self.screen.fill((settings.colors['background']))
         for i in range(settings.n):
@@ -120,6 +117,7 @@ class Game2048:
                         return 'd'
                     elif event.key == K_q or event.key == K_ESCAPE:
                         return 'q'
+
     def game_over(self):
         grid_copy = self.grid.copy()
         for move in 'lrud':
@@ -153,10 +151,5 @@ class Game2048:
 
             pygame.display.update()
 
-
             if not all((self.grid == old_grid).flatten()):
                 self.generate_number()
-
-
-
-

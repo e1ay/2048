@@ -1,10 +1,17 @@
+import sys
+
 import pygame
+from PyQt5.QtWidgets import QApplication
+
 from main import Game2048
 import settings
+import leaderboard
+click_img = pygame.image.load('img/clk.png')
+
 
 
 class SettingScreen:
-    def __init__(self):
+    def __init__(self, xx, yy, image, scale):
         pygame.init()
         self.mainscreen = pygame.display.set_mode((600, 600))
         self.option_button = []
@@ -13,17 +20,34 @@ class SettingScreen:
         self.screen_height = 600
         self.x = 10
         self.y = 10
+        pygame.display.set_caption('2048')
+        logo = pygame.image.load('img/logo2.jpeg')
+        pygame.display.set_icon(logo)
+    #     ----------------------------
+        self.image = pygame.transform.scale(image, (int(600 * scale), int(600 * scale)))
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (xx, yy)
+        self.clicked = False
+
 
     def show_screen(self):
         while True:
             stop = self.check_events()
             self.update_screen()
+            if self.clicked:
+                app = QApplication(sys.argv)
+                ex = leaderboard.Example()
+                ex.show()
             if stop:
                 q = Game2048()
                 q.play()
 
+
+
+
+
     def update_screen(self):
-        self.mainscreen.fill(settings.colors['background'])
+        self.mainscreen.fill(settings.colors['background2'])
         self.show_option()
         self.mouse_pointing_show()
         pygame.display.flip()
@@ -76,10 +100,27 @@ class SettingScreen:
         elif self.option_button[6][0].collidepoint(cursor_pos):
             self.draw_button_reaction(self.option_button[6][0], self.option_button[6][1])
 
+    def draw(self, x, y, box_width, box_height):
+        action = False
+        pos = pygame.mouse.get_pos()
+        if self.rect.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
+        self.mainscreen.blit(self.image, (self.rect.x, self.rect.y))
+        return action
+
     def show_option(self):
         self.draw_whatever("CHOOSE GOAL:", self.screen_width // 2 - 120 // 2, self.y + 10, 120, 60)
+        self.draw_whatever("TIPS:", 10, 10, 60, 60)
+        self.draw_whatever("Use the arrows", 40, 40, 120, 60)
 
         self.draw_whatever("Press 'Q' to exit", self.screen_width // 10, self.y + 500, 120, 60)
+
+        self.draw(300, 300, 100, 100)
 
         self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 90, 120, 60, "16", 1)
         self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 160, 120, 60, "2048", 1)
@@ -95,7 +136,7 @@ class SettingScreen:
 
     def draw_option_box(self, x, y, box_width, box_height, number, color_num):
         option_box_color = {1: (139,	109,	92),
-                            2: (150, 90, 70),
+                            2: (255, 0, 47),
                             3: (72, 100, 171)}
         box = pygame.Rect(x, y, box_width, box_height)
         self.option_button.append([box, number])
@@ -114,6 +155,7 @@ class SettingScreen:
         pygame.draw.rect(self.mainscreen, color, button, False, 15)
         self.draw_whatever(number, button.x, button.y, button.width, button.height)
         pygame.display.flip()
+
 
 
 

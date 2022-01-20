@@ -1,4 +1,4 @@
-from settingscreen import SettingScreen
+from settingscreen import SettingScreen, click_img
 
-r = SettingScreen()
+r = SettingScreen(50, 450, click_img, 0.1)
 r.show_screen()
