@@ -22,6 +22,7 @@ class Game2048:
         self.screen = pygame.display.set_mode((settings.window_size))
         pygame.font.init()
         self.font = pygame.font.SysFont('Comic Sans MS', 30)
+        self.player_name = settings.player_name
 
     def __str__(self):
         return str(self.grid)
@@ -145,11 +146,43 @@ class Game2048:
             self.make_move(s)
 
             if self.game_over():
-                print('loss')
+                self.end_lose()
+                pygame.display.flip()
+                time.sleep(2)
+                break
             if self.win():
-                print('win')
+                self.end_win()
+                pygame.display.flip()
+                time.sleep(2)
+                break
+
+
 
             pygame.display.update()
 
             if not all((self.grid == old_grid).flatten()):
                 self.generate_number()
+    def end_win(self):
+        self.screen.fill((0, 0, 0))
+        font = pygame.font.Font(None, 50)
+        text = font.render("Win!", True, (100, 255, 100))
+        text_x = 600 // 2 - text.get_width() // 2
+        text_y = 600 // 2 - text.get_height() // 2
+        text_w = text.get_width()
+        text_h = text.get_height()
+        self.screen.blit(text, (text_x, text_y))
+        pygame.draw.rect(self.screen, (0, 255, 0), (text_x - 10, text_y - 10,
+                                               text_w + 20, text_h + 20), 1)
+        print(self.player_name, 'win')
+
+    def end_lose(self):
+        self.screen.fill((0, 0, 0))
+        font = pygame.font.Font(None, 50)
+        text = font.render("Lose! Try again", True, (255, 0, 0))
+        text_x = 600 // 2 - text.get_width() // 2
+        text_y = 600 // 2 - text.get_height() // 2
+        text_w = text.get_width()
+        text_h = text.get_height()
+        self.screen.blit(text, (text_x, text_y))
+        pygame.draw.rect(self.screen, (255, 0, 0), (text_x - 10, text_y - 10,
+                                               text_w + 20, text_h + 20), 1)

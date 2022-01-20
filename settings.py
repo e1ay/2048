@@ -6,6 +6,7 @@ window_size = (w, w)
 block_size = 50
 margin = 10
 victory_point = 1024
+player_name = 'player'
 
 colors = {
     0: (163, 153, 144),
