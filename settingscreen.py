@@ -7,7 +7,7 @@ from main import Game2048
 import settings
 import leaderboard
 click_img = pygame.image.load('img/clk.png')
-
+app = QApplication(sys.argv)
 
 
 class SettingScreen:
@@ -35,7 +35,7 @@ class SettingScreen:
             stop = self.check_events()
             self.update_screen()
             if self.clicked:
-                app = QApplication(sys.argv)
+
                 ex = leaderboard.Example()
                 ex.show()
             if stop:

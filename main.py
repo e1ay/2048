@@ -192,6 +192,6 @@ class Game2048:
     def add_to_db(self):
         con = sqlite3.connect('database.sqlite')
         cur = con.cursor()
-        cur.execute("""INSERT into RECORDS(name, score) VALUES(?, ?)""", (settings.player_name, settings.victory_point))
+        cur.execute("""INSERT into RECORDS(name, score, size) VALUES(?, ?, ?)""", (settings.player_name, settings.victory_point, settings.n))
         con.commit()
         con.close()
