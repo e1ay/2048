@@ -12,13 +12,11 @@ class Game2048:
 
     def __init__(self):
         self.grid = np.zeros((settings.n, settings.n), dtype=int)
-
-        # self.W = 400
-        # self.H = self.W
+        pygame.mixer.music.load('music/bgm.mp3')
+        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.play(-1)
         self.c = 0
         pygame.init()
-        # logo = pygame.image.load('logo32x32.png')
-        # pygame.display.set_icon(logo)
         pygame.display.set_caption('2048')
         self.screen = pygame.display.set_mode(settings.window_size)
         pygame.font.init()
@@ -101,7 +99,6 @@ class Game2048:
                 text_rect = text_surface.get_rect(center=(rect_x + rect_w / 2,
                                                           rect_y + rect_h / 2))
                 self.screen.blit(text_surface, text_rect)
-
     @staticmethod
     def wait_for_k():
         while True:
