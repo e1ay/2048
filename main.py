@@ -3,7 +3,6 @@ import sqlite3
 import numpy as np
 import settings
 import random
-import sys
 from pygame.locals import *
 import pygame
 import time
@@ -16,12 +15,12 @@ class Game2048:
 
         # self.W = 400
         # self.H = self.W
-
+        self.c = 0
         pygame.init()
         # logo = pygame.image.load('logo32x32.png')
         # pygame.display.set_icon(logo)
         pygame.display.set_caption('2048')
-        self.screen = pygame.display.set_mode((settings.window_size))
+        self.screen = pygame.display.set_mode(settings.window_size)
         pygame.font.init()
         self.font = pygame.font.SysFont('Comic Sans MS', 30)
         self.player_name = settings.player_name
@@ -138,6 +137,7 @@ class Game2048:
     def play(self):
         self.generate_number(k=2)
         while True:
+            self.c += 1
             self.draw_game()
             pygame.display.flip()
             s = self.wait_for_k()
@@ -158,12 +158,11 @@ class Game2048:
                 time.sleep(2)
                 break
 
-
-
             pygame.display.update()
 
             if not all((self.grid == old_grid).flatten()):
                 self.generate_number()
+
     def end_win(self):
         self.screen.fill((0, 0, 0))
         font = pygame.font.Font(None, 50)
@@ -174,7 +173,7 @@ class Game2048:
         text_h = text.get_height()
         self.screen.blit(text, (text_x, text_y))
         pygame.draw.rect(self.screen, (0, 255, 0), (text_x - 10, text_y - 10,
-                                               text_w + 20, text_h + 20), 1)
+                                                    text_w + 20, text_h + 20), 1)
         self.add_to_db()
 
     def end_lose(self):
@@ -187,11 +186,12 @@ class Game2048:
         text_h = text.get_height()
         self.screen.blit(text, (text_x, text_y))
         pygame.draw.rect(self.screen, (255, 0, 0), (text_x - 10, text_y - 10,
-                                               text_w + 20, text_h + 20), 1)
+                                                    text_w + 20, text_h + 20), 1)
 
     def add_to_db(self):
         con = sqlite3.connect('database.sqlite')
         cur = con.cursor()
-        cur.execute("""INSERT into RECORDS(name, score, size) VALUES(?, ?, ?)""", (settings.player_name, settings.victory_point, settings.n))
+        cur.execute("""INSERT into RECORDS(name, score, size, steps) VALUES(?, ?, ?, ?)""",
+                    (settings.player_name, settings.victory_point, settings.n, self.c))
         con.commit()
         con.close()

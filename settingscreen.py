@@ -127,15 +127,15 @@ class SettingScreen:
         self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 230, 120, 60, "4096", 1)
 
         self.draw_whatever("CHOOSE SIZE:", self.screen_width // 2 - 120 // 2, self.y + 300, 120, 60)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 380, 120, 60, "2", 3)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 450, 120, 60, "4", 3)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 520, 120, 60, "8", 3)
+        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 380, 120, 60, "2", 1)
+        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 450, 120, 60, "4", 1)
+        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 520, 120, 60, "8", 1)
 
         self.draw_option_box(self.screen_width - self.x - 110,
                              self.screen_height - self.y - 110, 60, 60, "PLAY", 2)
 
     def draw_option_box(self, x, y, box_width, box_height, number, color_num):
-        option_box_color = {1: (139,	109,	92),
+        option_box_color = {1: (207, 198, 184),
                             2: (255, 0, 47),
                             3: (72, 100, 171)}
         box = pygame.Rect(x, y, box_width, box_height)
