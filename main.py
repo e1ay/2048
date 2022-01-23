@@ -106,13 +106,13 @@ class Game2048:
                 if event.type == QUIT:
                     return 'q'
                 if event.type == KEYDOWN:
-                    if event.key == K_UP:
+                    if event.key == K_UP or event.key == K_w:
                         return 'u'
-                    elif event.key == K_RIGHT:
+                    elif event.key == K_RIGHT or event.key == K_d:
                         return 'r'
-                    elif event.key == K_LEFT:
+                    elif event.key == K_LEFT or event.key == K_a:
                         return 'l'
-                    elif event.key == K_DOWN:
+                    elif event.key == K_DOWN or event.key == K_s:
                         return 'd'
                     elif event.key == K_q or event.key == K_ESCAPE:
                         return 'q'
@@ -140,6 +140,7 @@ class Game2048:
             s = self.wait_for_k()
 
             if s == 'q':
+                pygame.mixer.music.stop()
                 break
             old_grid = self.grid.copy()
             self.make_move(s)
