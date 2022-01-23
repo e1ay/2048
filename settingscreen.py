@@ -114,25 +114,27 @@ class SettingScreen:
         return action
 
     def show_option(self):
-        self.draw_whatever("CHOOSE GOAL:", self.screen_width // 2 - 120 // 2, self.y + 10, 120, 60)
-        self.draw_whatever("TIPS:", 10, 10, 60, 60)
-        self.draw_whatever("Use the arrows", 40, 40, 120, 60)
+        self.draw_whatever("CHOOSE GOAL:", self.screen_width // 2 - 440 // 2, self.y + 10, 120, 60)
+        self.draw_whatever("HOW TO PLAY:", 270, 400, 60, 60)
+        self.draw_whatever("Use your arrow keys or WASD to move the tiles.",240, 440, 120, 60)
+        self.draw_whatever("Tiles with the same number merge into one when they touch.", 270, 460, 60, 60, 25)
+        self.draw_whatever("Add them up to reach 2048!", 270, 480, 60, 60)
 
-        self.draw_whatever("Press 'Q' to exit", self.screen_width // 10, self.y + 500, 120, 60)
+        self.draw_whatever("Press 'Q' to exit", 240, self.y + 500, 120, 60)
 
         self.draw(300, 300, 100, 100)
 
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 90, 120, 60, "16", 1)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 160, 120, 60, "2048", 1)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 230, 120, 60, "4096", 1)
+        self.draw_option_box(self.screen_width // 2 - 450 // 2, self.y + 90, 120, 60, "16", 1)
+        self.draw_option_box(self.screen_width // 2 - 450 // 2, self.y + 160, 120, 60, "2048", 1)
+        self.draw_option_box(self.screen_width // 2 - 450 // 2, self.y + 230, 120, 60, "4096", 1)
 
-        self.draw_whatever("CHOOSE SIZE:", self.screen_width // 2 - 120 // 2, self.y + 300, 120, 60)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 380, 120, 60, "2", 1)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 450, 120, 60, "4", 1)
-        self.draw_option_box(self.screen_width // 2 - 120 // 2, self.y + 520, 120, 60, "8", 1)
+        self.draw_whatever("CHOOSE SIZE:", self.screen_width // 2 + 100, self.y + 10, 120, 60)
+        self.draw_option_box(self.screen_width // 2 + 100, self.y + 90, 120, 60, "2", 1)
+        self.draw_option_box(self.screen_width // 2 + 100, self.y + 160, 120, 60, "4", 1)
+        self.draw_option_box(self.screen_width // 2 + 100, self.y + 230, 120, 60, "8", 1)
 
-        self.draw_option_box(self.screen_width - self.x - 110,
-                             self.screen_height - self.y - 110, 60, 60, "PLAY", 2)
+        self.draw_option_box(self.screen_width - self.x - 320,
+                             self.screen_height - self.y - 490, 60, 60, "PLAY", 2)
 
     def draw_option_box(self, x, y, box_width, box_height, number, color_num):
         option_box_color = {1: (207, 198, 184),
