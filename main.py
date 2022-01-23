@@ -99,6 +99,7 @@ class Game2048:
                 text_rect = text_surface.get_rect(center=(rect_x + rect_w / 2,
                                                           rect_y + rect_h / 2))
                 self.screen.blit(text_surface, text_rect)
+
     @staticmethod
     def wait_for_k():
         while True:
@@ -165,6 +166,7 @@ class Game2048:
         self.screen.fill((0, 0, 0))
         font = pygame.font.Font(None, 50)
         text = font.render("Win!", True, (100, 255, 100))
+        text1 = font.render(f'Number of steps: {self.c}', True, (133, 133, 133))
         text_x = 600 // 2 - text.get_width() // 2
         text_y = 600 // 2 - text.get_height() // 2
         text_w = text.get_width()
@@ -172,12 +174,16 @@ class Game2048:
         self.screen.blit(text, (text_x, text_y))
         pygame.draw.rect(self.screen, (0, 255, 0), (text_x - 10, text_y - 10,
                                                     text_w + 20, text_h + 20), 1)
+        self.screen.blit(text1, (150, 400))
+        pygame.draw.rect(self.screen, (133, 133, 133), (text_x - 10, text_y - 10,
+                                                        text_w + 20, text_h + 20), 1)
         self.add_to_db()
 
     def end_lose(self):
         self.screen.fill((0, 0, 0))
         font = pygame.font.Font(None, 50)
         text = font.render("Lose! Try again", True, (255, 0, 0))
+        text1 = font.render(f'Number of steps: {self.c}', True, (133, 133, 133))
         text_x = 600 // 2 - text.get_width() // 2
         text_y = 600 // 2 - text.get_height() // 2
         text_w = text.get_width()
@@ -185,6 +191,9 @@ class Game2048:
         self.screen.blit(text, (text_x, text_y))
         pygame.draw.rect(self.screen, (255, 0, 0), (text_x - 10, text_y - 10,
                                                     text_w + 20, text_h + 20), 1)
+        self.screen.blit(text1, (150, 400))
+        pygame.draw.rect(self.screen, (133, 133, 133), (text_x - 10, text_y - 10,
+                                                        text_w + 20, text_h + 20), 1)
 
     def add_to_db(self):
         con = sqlite3.connect('database.sqlite')
