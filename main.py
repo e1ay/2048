@@ -149,12 +149,12 @@ class Game2048:
             if self.game_over():
                 self.end_lose()
                 pygame.display.flip()
-                time.sleep(2)
+                time.sleep(3)
                 break
             if self.win():
                 self.end_win()
                 pygame.display.flip()
-                time.sleep(2)
+                time.sleep(3)
                 break
 
             pygame.display.update()
